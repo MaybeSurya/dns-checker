@@ -34,7 +34,6 @@ You **do not** need to upload these files for the website to work. They are for 
 * `check_parens.js` - A utility script for developers to check code.
 * `find_unclosed_paren.js` - A utility script for developers to check code.
 * `paren_counts.js` - A utility script for developers to check code.
-* `dnsCheckerComponent.temp.js` - A temporary backup or test file.
 * `query.php` - An *optional* PHP backend for an alternative `dig`-based query method. The main app does not use this.
 
 ---
