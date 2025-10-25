@@ -41,7 +41,6 @@ You **do not** need to upload these files for the website to work. They are for 
 
 ## Preview
 
-*(Add a screenshot of your working application here!)*
 ![DNS Checker Preview](https://api.files.suryahost.in/dns-checker-github-project.png)
 
 ---
