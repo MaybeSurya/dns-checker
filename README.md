@@ -2,7 +2,11 @@
 
 A lightweight, static web app built with React to query and compare DNS records from multiple DNS-over-HTTPS (DoH) providers. Features dark mode, search history, and JSON export.
 
-## Download
+## Live Preview 
+
+You can visit this project live at <a href="https://dns-checker.maybesurya.live">DNS Checker</a>
+
+## Code Download
 
 You can download all the project files as a single ZIP package directly from GitHub.
 
