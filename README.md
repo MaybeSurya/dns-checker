@@ -64,7 +64,7 @@ If you want to modify the code or run it locally using a development server (whi
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/MaybeSurya/dns-checker.git](https://github.com/MaybeSurya/dns-checker.git)
+    git clone https://github.com/MaybeSurya/dns-checker.git
     cd dns-checker
     ```
 
