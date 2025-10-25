@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DNS Checker — codedbysurya</title>
+    <meta name="description" content="Professional DNS Checker tool to query and compare DNS records across major resolvers." />
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = { darkMode: 'class' };
+      </script>
+    <!-- Load custom stylesheet after Tailwind so our variable overrides and dark rules take precedence -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+    <div id="root"></div>
+
+      <!-- React and ReactDOM with specific versions -->
+      <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+      <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+
+    <!-- Components -->
+    <script src="dnsCheckerComponent.js"></script>
+
+    <!-- Main App -->
+    <script src="app.js"></script>
+
+    <!-- Debug info -->
+    <script>
+      console.log('React loaded:', !!window.React);
+      console.log('ReactDOM loaded:', !!window.ReactDOM);
+      console.log('DNSChecker component loaded:', !!window.DNSChecker);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,336 @@
+/* style.css — improved dark-mode form styling
+   - Ensures inputs/selects/textarea have correct bg + text in dark mode
+   - Improves placeholder visibility, focus ring and caret color
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root{
+  /* Light-mode variables (defaults) */
+  --bg: #f8fafc;         /* page bg (light) */
+  --text: #0f172a;       /* page text (light) */
+  --muted: #64748b;      /* muted small text */
+  --accent: #6366f1;
+  --input-bg: #ffffff;
+  --input-border: #d1d5db;
+  --input-text: #0f172a;
+  /* stronger placeholder for light mode */
+  --placeholder: #6b7280;
+  /* Surface / card colors for light mode */
+  --card-bg: #ffffff;
+  --card-text: var(--text);
+  --card-border: rgba(16,24,40,0.06);
+  --btn-ghost-border: rgba(99,102,241,0.08);
+}
+
+/* Reset and alignment helpers */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Headings & labels: consistent spacing */
+h1,h2,h3 { margin: 0 0 0.5rem; line-height: 1.2; }
+label { display: block; margin-bottom: 0.35rem; font-weight: 600; }
+
+/* Form control sizing to keep vertical rhythm consistent */
+input, textarea, select { min-height: 44px; display: block; }
+.form-compact { padding: 0.6rem 0.7rem; min-height: 44px; }
+
+/* Button alignment: consistent height and centering */
+.btn { align-items: center; justify-content: center; display: inline-flex; gap: 0.5rem; min-height: 40px; padding: 0.55rem 0.9rem; }
+.btn.primary, .btn.ghost { line-height: 1; }
+
+/* Make border-b rows align their children consistently */
+.border-b { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: .75rem; padding-bottom: .75rem; }
+.border-b > div { min-width: 0; }
+
+/* Provider content: ensure answers area doesn't push controls out of alignment */
+.card .mt-2 { margin-top: .5rem; }
+.card .font-medium { font-weight: 600; }
+
+/* Buttons in header wrap on small widths */
+.flex.items-center { align-items: center; }
+.flex.items-center .btn { margin-left: .5rem; }
+
+/* Ensure small pills and status badges align center */
+.text-xs.px-2 { display: inline-flex; align-items: center; }
+
+/* Make sure long texts wrap instead of overflowing */
+.text-xs, .font-medium, p { word-break: break-word; }
+
+
+/* Dark-mode variable overrides applied when html has .dark */
+html.dark {
+  --bg: #0f172a;         /* dark page bg */
+  --text: #e6eef8;       /* page text (dark) */
+  --muted: #94a3b8;
+  --accent: #93c5fd;
+  --input-bg: #071029;
+  --input-border: #233044;
+  --input-text: #e6eef8;
+  /* placeholder in dark mode (slightly lighter than text) */
+  --placeholder: #9ca3af;
+  /* Surface / card colors for dark mode */
+  --card-bg: #071226;
+  --card-text: var(--text);
+  --card-border: rgba(255,255,255,0.03);
+  --btn-ghost-border: rgba(255,255,255,0.06);
+}
+
+/* Base */
+body {
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.22s, color 0.22s;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  animation: spin 0.75s linear infinite;
+}
+
+/* Subtle page-level container improvements */
+.min-h-screen { min-height: 100vh; }
+.max-w-6xl { max-width: 96rem; }
+
+
+button {
+  transition: all 0.14s ease-in-out;
+}
+
+button:hover { opacity: 0.95; }
+
+/* Inputs default (light) */
+input, textarea, select {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  border-radius: 0.6rem;
+  padding: 0.7rem;
+  font-size: 0.95rem;
+  caret-color: var(--accent);
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Style native select so options inherit our colors and add a simple arrow */
+select {
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 1rem) center, calc(100% - 0.65rem) center;
+  background-size: 8px 8px, 8px 8px;
+  background-repeat: no-repeat;
+  padding-right: 2.2rem; /* room for arrow */
+  color: var(--input-text);
+  opacity: 1;
+}
+
+/* Ensure dropdown options are readable in both themes (some browsers allow styling) */
+select option, option {
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+/* Some browsers render a native caret/arrow; hide ms expand for consistent look */
+select::-ms-expand { display: none; }
+
+/* Selection inside inputs should remain readable */
+input::selection, textarea::selection, select::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Placeholder color */
+input::placeholder, textarea::placeholder, select::placeholder {
+  color: var(--placeholder);
+  opacity: 0.9;
+}
+
+/* Focus */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.08);
+  border-color: var(--accent);
+}
+
+/* Compact forms */
+.form-compact { padding: 0.6rem 0.7rem; }
+
+/* Dark mode wrapper class (we toggle documentElement.classList.add('dark')) */
+/* Removed redundant global .dark selectors — variable-based approach above handles colors */
+
+/* Inputs pick up colors from variables; this selector increases specificity for dark when needed */
+html.dark input, html.dark textarea, html.dark select {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1px solid var(--input-border);
+  -webkit-text-fill-color: var(--input-text); /* Safari */
+  caret-color: var(--accent);
+}
+
+/* Placeholder in dark mode – driven by variable; keep a specific dark placeholder rule for consistency */
+html.dark input::placeholder, html.dark textarea::placeholder, html.dark select::placeholder {
+  color: var(--placeholder);
+  opacity: 0.9;
+}
+
+/* Disabled look */
+input[disabled], textarea[disabled], select[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Small utility */
+.small { font-size: 0.85rem; }
+.center { text-align: center; }
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  color: var(--card-text);
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(16,24,40,0.06);
+  padding: 1rem;
+  border: 1px solid var(--card-border);
+}
+html.dark .card {
+  /* keep a slightly stronger shadow in dark for depth */
+  box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+}
+
+/* Buttons */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  padding:0.6rem 1rem;
+  border-radius:0.65rem;
+  border:1px solid transparent;
+}
+.btn.primary { background: #4f46e5; color: #fff; }
+.btn.ghost { background: transparent; border-color: var(--btn-ghost-border); color: inherit; }
+
+/* Clear history button has a subtle danger tint in ghost style */
+.btn.ghost.danger { border-color: rgba(239,68,68,0.12); color: #ef4444; }
+
+/* Spinner (loader) - reintroduced and implemented as a small, efficient CSS animation. */
+.loader {
+  display:inline-block;
+  width:0.9rem;
+  height:0.9rem;
+  border:2px solid rgba(16,24,40,0.12);
+  border-top-color: var(--accent);
+  border-radius:9999px;
+  animation: spin 0.9s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Utility color helper used by component for 'no response' text */
+.text-rose-600 { color: #ef4444; }
+
+/* Small animation on cards */
+.card { 
+  transform-origin: top center; 
+  transition: transform 220ms ease, box-shadow 220ms ease;
+  margin-bottom: 1.5rem; /* Add gap between cards */
+}
+.card:hover { 
+  transform: translateY(-6px);
+  z-index: 1; /* Ensure hovering card stays on top */
+}
+
+/* Watermark in bottom-right */
+.watermark {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  z-index: 60;
+  backdrop-filter: blur(4px);
+}
+html.dark .watermark { background: rgba(255,255,255,0.03); }
+.watermark a { color: var(--accent); text-decoration: none; }
+.watermark a:hover { text-decoration: underline; }
+
+/* Icon sizing */
+.icon { width: 1rem; height: 1rem; display: inline-block; vertical-align: middle; }
+.icon-sm { width: 0.9rem; height: 0.9rem; }
+.btn .icon { margin-right: 0.5rem; }
+
+/* Responsive small tweaks */
+@media (max-width: 640px){
+  input, textarea, select { font-size: 0.92rem; }
+}
+
+/* Responsive improvements to ensure content fits all screen sizes */
+:root {
+  --container-max: 1100px;
+}
+
+/* Make the top-level container fluid and centered with sensible max width */
+.min-h-screen {
+  box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure form and grid contents wrap nicely */
+form { width: 100%; }
+input, select, textarea { width: 100%; box-sizing: border-box; }
+
+/* Make utility flex wrap so buttons don't overflow on small screens */
+.flex { display: flex; flex-wrap: wrap; }
+.flex .btn { margin-top: 0.5rem; }
+.md\:col-span-2 { width: 100%; }
+
+/* Cards scale and stack on smaller screens */
+.card { width: 100%; }
+
+/* Provider blocks: allow inner content to shrink and wrap */
+.card .flex { align-items: center; }
+.card .flex > .flex-1 { min-width: 0; }
+.card .text-xs { word-break: break-word; }
+
+/* History and other lists should scroll if extremely long on tiny devices */
+.history-list, .providers-list { max-height: 50vh; overflow: auto; }
+
+/* Watermark: hide on very small viewports to avoid covering content */
+@media (max-width: 420px) {
+  .watermark { display: none; }
+}
+
+/* Slightly increase touch targets on narrow screens */
+@media (max-width: 480px) {
+  .btn { padding: 0.75rem 1rem; font-size: 0.95rem; }
+  input, select, textarea { padding: 0.85rem; }
+}
+
+/* If Tailwind-like classes are missing, provide lightweight fallbacks */
+.mx-auto { margin-left: auto; margin-right: auto; }
+.p-6 { padding: 1.5rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-2 { gap: .5rem; }
+
+/* Prevent buttons and pill elements from causing layout overflow */
+.rounded-full { border-radius: 9999px; }
+.inline-flex { display: inline-flex; align-items: center; }
+
